@@ -1,3 +1,5 @@
+USE photoapp;
+
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255) NOT NULL UNIQUE,
@@ -37,3 +39,32 @@ CREATE TABLE ratings (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (media_id) REFERENCES media(id)
 );
+
+CREATE TABLE likes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  media_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(user_id, media_id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (media_id) REFERENCES media(id) ON DELETE CASCADE
+);
+
+
+
+
+-- Describe the structure of the 'users' table
+DESCRIBE users;
+
+-- Describe the structure of the 'media' table
+DESCRIBE media;
+
+-- Describe the structure of the 'comments' table
+DESCRIBE comments;
+
+-- Describe the structure of the 'ratings' table
+DESCRIBE ratings;
+
+DESCRIBE likes;
+
+select * from media;
