@@ -3,6 +3,9 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const mediaRoutes = require('./routes/media');
 const userRoutes = require('./routes/user');
+const likeRoutes = require('./routes/like');
+const ratingRoutes = require('./routes/rating');
+const commentRoutes = require('./routes/comment');
 const cors = require('cors');
 
 
@@ -25,6 +28,9 @@ console.log('men mount!!!')
 app.use('/api/auth', authRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/like', likeRoutes);
+app.use('/api/rating', ratingRoutes);
+app.use('/api/comment', commentRoutes);
 
 app.get('/test-db', async (req, res) => {
    

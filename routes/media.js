@@ -58,7 +58,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
 });
 
 // POST /api/media/:id/comments (add comment)
-router.post('/:id/comments', authenticateToken, isConsumer, async (req, res) => {
+router.post('/:id/comments', authenticateToken, async (req, res) => {
   const { comment } = req.body;
   const mediaId = req.params.id;
   await pool.query('INSERT INTO comments (user_id, media_id, comment) VALUES (?, ?, ?)', [
@@ -70,7 +70,7 @@ router.post('/:id/comments', authenticateToken, isConsumer, async (req, res) => 
 });
 
 // POST /api/media/:id/rate (add rating)
-router.post('/:id/rate', authenticateToken, isConsumer, async (req, res) => {
+router.post('/:id/rate', authenticateToken, async (req, res) => {
   const { rating } = req.body;
   const mediaId = req.params.id;
   if (rating < 1 || rating > 5) return res.status(400).json({ error: 'Rating must be 1–5' });
@@ -86,7 +86,7 @@ router.post('/:id/rate', authenticateToken, isConsumer, async (req, res) => {
 
 
 // POST /api/media/:id/like
-router.post('/:id/like', authenticateToken, isConsumer, async (req, res) => {
+router.post('/:id/like', authenticateToken, async (req, res) => {
   try {
     const mediaId = req.params.id;
     const { liked, message } = await addLike(req.user.id, mediaId);
